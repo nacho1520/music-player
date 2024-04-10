@@ -5,6 +5,7 @@ window.addEventListener('load', () => {
     const trackAuthor = document.querySelector('.author');
 
     // Tracks Buttons
+    const audio = document.querySelector('#audio');
     const playStopBtn = document.querySelector('.primary-btn');
     const playStopLabel = document.querySelector('#play-stop-btn');
     const backBtn = document.querySelector('#back-btn');
@@ -17,12 +18,14 @@ window.addEventListener('load', () => {
         {
             name: "Lost in the City Lights",
             author: "Cosmo Sheldrake",
-            image: "./assets/cover-1.png"
+            image: "./assets/cover-1.png",
+            src: "./assets/forest-lullaby-110624.mp3"
         },
         {
             name: "Forest Lullaby",
             author: "Lesfm",
-            image: "./assets/cover-2.png"
+            image: "./assets/cover-2.png",
+            src: "./assets/lost-in-city-lights-145038.mp3"
         }
     ];
 
@@ -36,7 +39,39 @@ window.addEventListener('load', () => {
     // Initializing
     let trackIndex = 0;
     let isPlaying = false;
+    let audioPosition = 0;
     updateTrack(trackIndex);
+
+    playStopBtn.addEventListener('click', () => {
+        if(!isPlaying) {
+            if(audioPosition == 0) {
+                audio.src = tracks[trackIndex].src;
+            }
+            audio.load();
+            audio.currentTime = audioPosition;
+            audio
+                .play()
+                .then(() => {
+                    playStopLabel.src = stopImage;
+                    isPlaying = true;
+                    updateTrack(trackIndex);
+                })
+        } else {
+            audioPosition = audio.currentTime;
+            audio.pause();
+            playStopLabel.src = playImage;
+            isPlaying = false;
+        }
+    });
+
+    const playTrack = (trackIndex) => {
+        audio.src = tracks[trackIndex].src;
+        audio.load();
+        audio.play();
+        playStopLabel.src = stopImage;
+        isPlaying = true;
+        updateTrack(trackIndex);
+    }
 
     backBtn.addEventListener('click', () => {
         if(trackIndex > 0 ) {
@@ -44,7 +79,7 @@ window.addEventListener('load', () => {
         } else {
             trackIndex = tracks.length - 1;
         }
-        updateTrack(trackIndex);
+        playTrack(trackIndex);
     });
     
     nextBtn.addEventListener('click', () => {
@@ -53,17 +88,6 @@ window.addEventListener('load', () => {
         } else {
             trackIndex = 0;
         }
-        updateTrack(trackIndex);
+        playTrack(trackIndex);
     });
-
-    playStopBtn.addEventListener('click', () => {
-        if(!isPlaying) {
-            playStopLabel.src = playImage;
-            isPlaying = true;
-        } else {
-            playStopLabel.src = stopImage;
-            isPlaying = false;
-        }
-    });
-
 });

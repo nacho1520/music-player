@@ -5,7 +5,7 @@
 body
     display: flex
     justify-content: center
-    // padding-top: 140px
+    padding-top: 140px
     font-family: "Inter", sans-serif
 
 .bg-img
@@ -38,10 +38,23 @@ body
         .author
             font-size: 0.75rem
             color: #4D5562
+    .time-container
+        width: 100%
+        display: flex
+        flex-direction: column
+        .time-row
+            display: flex
+            justify-content: space-between
+            align-items: center
+            margin-bottom: 5px
+            p
+                color: #4D5562
+                font-size: 0.625rem
     .btn-row
         width: 100%
         display: flex
-        justify-content: center    
+        justify-content: center  
+        margin-top: 36px  
     .btn-container
         display: inline-flex
         align-items: center
@@ -59,3 +72,20 @@ body
             width: 32px
             height: 32px
             cursor: pointer
+
+input[type="range"]::-webkit-slider-runnable-track
+    height: 4px
+    background: #E5E7EB
+    border-radius: 4px
+    overflow: hidden
+    border-radius: 16px
+
+input[type="range"]::-webkit-slider-thumb
+    appearance: none
+    -webkit-appearance: none
+    height: 4px
+    width: 4px
+    background-color: #C93B76
+
+input[type="range"]::-webkit-slider-thumb
+    box-shadow: -407px 0 0 400px #C93B76

@@ -10,6 +10,10 @@ window.addEventListener('load', () => {
     const playStopLabel = document.querySelector('#play-stop-btn');
     const backBtn = document.querySelector('#back-btn');
     const nextBtn = document.querySelector('#next-btn');
+
+    const currentTime = document.querySelector('#current-time');
+    const totalTime = document.querySelector('#total-time');
+    const trackSlider = document.querySelector('#track-slider');
     
     const playImage = "./assets/Play_fill.svg";
     const stopImage = "./assets/Stop_fill.svg";
@@ -89,5 +93,25 @@ window.addEventListener('load', () => {
             trackIndex = 0;
         }
         playTrack(trackIndex);
+    });
+
+    const formatTime = (seconds) => {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${ minutes }:${ remainingSeconds < 10 ? '0' : '' }${ remainingSeconds }`;
+    }
+
+    audio.addEventListener('timeupdate', () => {
+        const current = formatTime(audio.currentTime);
+        const total = formatTime(audio.duration);
+        currentTime.textContent = current;
+        totalTime.textContent = total;
+        const currentPosition = ( audio.currentTime / audio.duration ) * 100;
+        trackSlider.value = currentPosition;
+    });
+
+    trackSlider.addEventListener('input', () => {
+        const newPosition = ( trackSlider.value / 100 ) * audio.duration;
+        audio.currentTime = newPosition;
     });
 });

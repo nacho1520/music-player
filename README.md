@@ -1,4 +1,4 @@
-# FAQ Page
+# Music Player
 
 Music player made with HTML, SASS and Vanilla JavaScript. This is a challenge for [devChallenges](https://devchallenges.io/)
 

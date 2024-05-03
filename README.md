@@ -10,4 +10,4 @@ Music player made with HTML, SASS and Vanilla JavaScript. This is a challenge fo
 
 
 
-![Screenshot](https://github.com/nacho1520/faq-page/blob/main/public/shot.png)
+![Screenshot](https://github.com/nacho1520/music-player/blob/main/public/shot.png)
